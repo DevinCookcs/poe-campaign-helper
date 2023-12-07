@@ -1,25 +1,25 @@
 import { useState } from "react";
 
 const Carousel = ({ images }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [current, setCurrent] = useState(0);
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
+    setCurrent((prevIndex) =>
       prevIndex + 1 === images.length ? 0 : prevIndex + 1
     );
   };
   const handlePrevious = () => {
-    setCurrentIndex((prevIndex) =>
+    setCurrent((prevIndex) =>
       prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
     );
   };
   const handleDotClick = (index) => {
-    setCurrentIndex(index);
+    setCurrent(index);
   };
 
   return (
     <div className="carousel">
-      <img key={currentIndex} src={images[currentIndex]} alt="test" />
+      <img key={current} src={images[current]} alt="test" />
       <div className="slide_direction">
         <div className="left" onClick={handlePrevious}>
           <svg
@@ -46,7 +46,7 @@ const Carousel = ({ images }) => {
         {images.map((_, index) => (
           <div
             key={index}
-            className={`dot ${currentIndex === index ? "active" : ""}`}
+            className={`dot ${current === index ? "active" : ""}`}
             onClick={() => handleDotClick(index)}
           ></div>
         ))}
